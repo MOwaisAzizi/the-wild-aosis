@@ -8,6 +8,7 @@ import Account from './pages/Account'
 import Users from './pages/Users'
 import PageNotFound from './pages/PageNotFound'
 import Settings from './pages/Settings'
+import AppLayout from "./ui/AppLayout";
 
 // these are all in templet leteral but by using extention it seem that is not
 // const StyledApp = styled.div`
@@ -24,7 +25,9 @@ function App() {
    <>
        <GlobalStyles/>
    <BrowserRouter>
-    <Routes>
+    <Routes>  
+      <Route element={<AppLayout/>}>
+       
       {/* //this is for default page so whin we do not go to any pages('/') it atomaticall will navigate to pashbord */}
     <Route index element={<Navigate to={'dashboard'}/>}/>
     <Route path="dashboard" element={<Dashboard/>}/>
@@ -35,6 +38,7 @@ function App() {
     <Route path="pageNotFound" element={<PageNotFound/>}/>
     <Route path="login" element={<Login/>}/>
     <Route path="account" element={<Account/>}/>
+      </Route>
    </Routes>
    </BrowserRouter>
    </>
