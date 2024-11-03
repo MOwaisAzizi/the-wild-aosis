@@ -24,9 +24,9 @@ export default function AppLayout(){
        <Header/>
        <Sidebar/>
 
-       <Main>
+        <Main>
        <Outlet/>
-        </Main>         
+         </Main>         
        </StyledAppLayout>
     )
 }
