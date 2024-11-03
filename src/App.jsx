@@ -9,6 +9,8 @@ import Users from './pages/Users'
 import PageNotFound from './pages/PageNotFound'
 import Settings from './pages/Settings'
 import AppLayout from "./ui/AppLayout";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 
 // these are all in templet leteral but by using extention it seem that is not
 // const StyledApp = styled.div`
@@ -20,11 +22,21 @@ import AppLayout from "./ui/AppLayout";
 //   background-color: yellow;
 // `
 
+const queryClint = new QueryClient(
+{  defaultOptions :{
+  queries:{
+    // cacheTime : 60 * 1000
+    cacheTime : 0
+
+  }
+}
+})
+
 function App() {
-  return (
-   <>
-       <GlobalStyles/>
-   <BrowserRouter>
+  return<QueryClientProvider client={queryClint}>
+   <ReactQueryDevtools initialIsOpen = {false}/>
+ <GlobalStyles/>
+   <BrowserRouter> 
     <Routes>  
       <Route element={<AppLayout/>}>
        
@@ -41,8 +53,7 @@ function App() {
       </Route>
    </Routes>
    </BrowserRouter>
-   </>
-  );
+ </QueryClientProvider>
 }
 export default App;
 
