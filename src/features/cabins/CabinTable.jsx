@@ -33,13 +33,10 @@ export default function CabinTable(){
 
  const {isLoading,data:cabinData} =  useQuery({
   ////key to store data for this name to catch 
-    queryKey:['cabin'],
+    queryKey:['cabins'],
     queryFn:gitCabins
   })
  if(isLoading) return <Spinner/>
-
- console.log(cabinData)
- 
   
 return (
   <Table role="table">

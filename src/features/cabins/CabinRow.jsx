@@ -1,6 +1,8 @@
 import styled from "styled-components";
 import  {formatCurrency} from '../../utils/helpers'
 import PropTypes from 'prop-types';
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { deleteCabin } from "../../services/apiCabins";
 
 const TableRow = styled.div`
   display: grid;
@@ -42,25 +44,44 @@ const Discount = styled.div`
 `;
 
 export default function CabinRow({cabin}){
-  console.log(cabin);
   
-  // const {discount,image,maxCapacity,name,regularPrice} = cabin
-  // console.log(name,maxCapacity,regularPrice,discount,image);
+  const {discount,image,maxCapacity,name,regularPrice,id:cabinId} = cabin
+
+  //we access to queryClient(states in devtools) in app to refresh that
+  const queryClient = useQueryClient()
+  
+//mutate==mutateFn
+//it is actualy not refresh the page as we delet but to do that we use onsuccess method
+const {isloading:isDeleting,mutate} = useMutation({
+  mutationFn : (id)=> deleteCabin(id),
+  onSuccess : () =>{
+    //consume invalid and refresh
+    queryClient.invalidateQueries({
+      //refresh this key
+      queryKey: ['cabins']
+    })
+    alert('cabin successfully deleted !')
+  },
+  onError:(err)=>alert(err.message)
+})
+
 
  return (
   <TableRow role="row">
-    <Img src={cabin.image}/>
-    <Cabin>{cabin.name}</Cabin>
-    <div>Fits up tp {cabin.maxCapacity} quests</div>
-    <Price>{formatCurrency(cabin.regularPrice)}</Price>
-    <Discount>{formatCurrency(cabin.discount)}</Discount>
-    <button>Delete</button>
+    <Img src={image}/>
+    <Cabin>{name}</Cabin>
+    <div>Fits up tp {maxCapacity} quests</div>
+    <Price>{formatCurrency(regularPrice)}</Price>
+    <Discount>{formatCurrency(discount)}</Discount>
+    <button onClick={()=>mutate(cabinId)} disabled={isDeleting}>Delete</button>
   </TableRow>
  )
 }
 
+////this not importent
 CabinRow.propTypes = {
   cabin: PropTypes.shape({
+      id:PropTypes.string.isRequired,
       image: PropTypes.string.isRequired,
       name: PropTypes.string.isRequired,
       maxCapacity: PropTypes.number.isRequired,

@@ -22,12 +22,11 @@ import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 //   background-color: yellow;
 // `
 
-const queryClint = new QueryClient(
-{  defaultOptions :{
+const queryClint = new QueryClient({  defaultOptions :
+  {
   queries:{
     // cacheTime : 60 * 1000
     cacheTime : 0
-
   }
 }
 })
