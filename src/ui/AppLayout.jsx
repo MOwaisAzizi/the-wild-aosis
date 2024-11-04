@@ -17,6 +17,13 @@ export default function AppLayout(){
         background-color: var(--color-grey-50);
         padding: 4rem 4.6rem 6.4rem;
     `
+    const Container = styled.div`
+      max-width: 120rem;
+      margin: 0 auto;
+      display: flex;
+      gap: 3.2rem;
+      flex-direction: column;
+    `
 
     return(
        <StyledAppLayout>
@@ -25,7 +32,9 @@ export default function AppLayout(){
        <Sidebar/>
 
         <Main>
+         <Container>
        <Outlet/>
+         </Container>
          </Main>         
        </StyledAppLayout>
     )

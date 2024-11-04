@@ -3,6 +3,7 @@ import  {formatCurrency} from '../../utils/helpers'
 import PropTypes from 'prop-types';
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { deleteCabin } from "../../services/apiCabins";
+import toast from "react-hot-toast";
 
 const TableRow = styled.div`
   display: grid;
@@ -55,14 +56,14 @@ export default function CabinRow({cabin}){
 const {isloading:isDeleting,mutate} = useMutation({
   mutationFn : (id)=> deleteCabin(id),
   onSuccess : () =>{
-    //consume invalid and refresh
+    toast.success('cabin successfully deleted !')
+    //consume invalid and refresh/we can do not use it but after refresh the table will delete
     queryClient.invalidateQueries({
       //refresh this key
       queryKey: ['cabins']
     })
-    alert('cabin successfully deleted !')
   },
-  onError:(err)=>alert(err.message)
+  onError:(err)=>toast.error(err.message)
 })
 
 
@@ -70,7 +71,7 @@ const {isloading:isDeleting,mutate} = useMutation({
   <TableRow role="row">
     <Img src={image}/>
     <Cabin>{name}</Cabin>
-    <div>Fits up tp {maxCapacity} quests</div>
+    <div>Fits up to {maxCapacity} quests</div>
     <Price>{formatCurrency(regularPrice)}</Price>
     <Discount>{formatCurrency(discount)}</Discount>
     <button onClick={()=>mutate(cabinId)} disabled={isDeleting}>Delete</button>
