@@ -45,16 +45,14 @@ const Discount = styled.div`
 `;
 
 export default function CabinRow({cabin}){
-  
   const {discount,image,maxCapacity,name,regularPrice,id:cabinId} = cabin
-
   //we access to queryClient(states in devtools) in app to refresh that
   const queryClient = useQueryClient()
   
 //mutate==mutateFn
 //it is actualy not refresh the page as we delet but to do that we use onsuccess method
 const {isloading:isDeleting,mutate} = useMutation({
-  mutationFn : (id)=> deleteCabin(id),
+  mutationFn : (id)=> deleteCabin(id),//or deleteCabin
   onSuccess : () =>{
     toast.success('cabin successfully deleted !')
     //consume invalid and refresh/we can do not use it but after refresh the table will delete

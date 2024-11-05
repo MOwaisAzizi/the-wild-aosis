@@ -16,6 +16,7 @@ export default function AppLayout(){
     const Main = styled.main`
         background-color: var(--color-grey-50);
         padding: 4rem 4.6rem 6.4rem;
+        overflow: scroll;
     `
     const Container = styled.div`
       max-width: 120rem;
