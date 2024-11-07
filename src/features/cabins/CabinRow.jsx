@@ -1,9 +1,12 @@
 import styled from "styled-components";
 import  {formatCurrency} from '../../utils/helpers'
 import PropTypes from 'prop-types';
-import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { deleteCabin } from "../../services/apiCabins";
-import toast from "react-hot-toast";
+import { useState } from "react";
+import CreateCabinForm from "./CreateCabinForm";
+import { useDeleteCabin } from "./useDeleteCabin";
+import { HiPencil, HiTrash } from "react-icons/hi";
+import { HiSquare2Stack } from "react-icons/hi2";
+import { useCreateCabin } from "./useCreateCabin";
 
 const TableRow = styled.div`
   display: grid;
@@ -45,39 +48,38 @@ const Discount = styled.div`
 `;
 
 export default function CabinRow({cabin}){
-  const {discount,image,maxCapacity,name,regularPrice,id:cabinId} = cabin
-  //we access to queryClient(states in devtools) in app to refresh that
-  const queryClient = useQueryClient()
-  
-//mutate==mutateFn
-//it is actualy not refresh the page as we delet but to do that we use onsuccess method
-const {isloading:isDeleting,mutate} = useMutation({
-  mutationFn : (id)=> deleteCabin(id),//or deleteCabin
-  onSuccess : () =>{
-    toast.success('cabin successfully deleted !')
-    //consume invalid and refresh/we can do not use it but after refresh the table will delete
-    queryClient.invalidateQueries({
-      //refresh this key
-      queryKey: ['cabins']
-    })
-  },
-  onError:(err)=>toast.error(err.message)
-})
+  const {isDeleting,deleteCabin} = useDeleteCabin()
+  const {createCabin,isCreating}= useCreateCabin()
+  const[showForm,setShowForm] = useState(false)
+  const {discount,image,maxCapacity,name,regularPrice,discription,id:cabinId} = cabin
 
+function hanldeDuplicate(){
+  const cabin = {
+    name:`copy of ${name}`,image,discount,maxCapacity,regularPrice,discription
+  }
+ createCabin(cabin)
+}
 
  return (
-  <TableRow role="row">
+  <>
+    <TableRow role="row">
     <Img src={image}/>
     <Cabin>{name}</Cabin>
     <div>Fits up to {maxCapacity} quests</div>
     <Price>{formatCurrency(regularPrice)}</Price>
-    <Discount>{formatCurrency(discount)}</Discount>
-    <button onClick={()=>mutate(cabinId)} disabled={isDeleting}>Delete</button>
+    {discount ? <Discount>{formatCurrency(discount)}</Discount>: <span>&mdash;</span>}
+    <div>
+    <button onClick={hanldeDuplicate}><HiSquare2Stack disabled={isCreating}/></button>
+    <button onClick={()=>setShowForm(show=>!show)}><HiPencil/></button>
+    <button onClick={()=>deleteCabin(cabinId)} disabled={isDeleting}><HiTrash/></button>
+    </div>
   </TableRow>
+  {showForm && <CreateCabinForm cabinToEdit = {cabin} />}
+  </>
  )
 }
 
-////this not importent
+////this not importent but should be thare
 CabinRow.propTypes = {
   cabin: PropTypes.shape({
       id:PropTypes.string.isRequired,
@@ -86,5 +88,7 @@ CabinRow.propTypes = {
       maxCapacity: PropTypes.number.isRequired,
       regularPrice: PropTypes.number.isRequired,
       discount: PropTypes.number.isRequired,
+      discription: PropTypes.string.isRequired,
   }).isRequired,
 };
+
