@@ -6,7 +6,7 @@ export function useCreateCabin(){
 const queryClinet = useQueryClient()
 
     const {mutate:createCabin, isLoading:isCreating} = useMutation({
-        mutationFn : createEditCabin, //or ()=>createCabin(id)
+        mutationFn : createEditCabin, //or (data)=>createCabin(data)
         onSuccess : () => {
           toast('table created!')
           queryClinet.invalidateQueries({

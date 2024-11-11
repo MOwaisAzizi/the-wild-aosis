@@ -28,6 +28,7 @@ export async function deleteCabin(id) {
 }
 //id just for editing is need
 export async function createEditCabin(newCabin,id) {
+    
     //for editing is need , it has path whin you do not reChoise an image(it is already saved in data base)
     const hasImagePath = newCabin.image?.startsWith?.(supabaseUrl)
     //name to store in databases
