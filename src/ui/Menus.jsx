@@ -1,10 +1,14 @@
+import{ createContext, useContext, useState } from "react";
+import { createPortal } from "react-dom";
+import { HiEllipsisVertical } from "react-icons/hi2";
 import styled from "styled-components";
+import { useOutSiteClick } from "../hooks/useOutsiteClick";
 
-const StyledMenu = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-`;
+// const StyledMenu = styled.div`
+//   display: flex;
+//   align-items: center;
+//   justify-content: flex-end;
+// `;
 
 const StyledToggle = styled.button`
   background: none;
@@ -60,3 +64,72 @@ const StyledButton = styled.button`
     transition: all 0.3s;
   }
 `;
+
+const MenusContext = createContext()
+
+export default function Menus({children}){
+  const [openId,setOpenId] = useState('')
+  //to place the popup in right positon
+  const[position,setPosition] = useState(null)
+  const close = ()=>setOpenId('')
+  const open = setOpenId
+  //(value)setOpenId(value)
+
+
+  return <MenusContext.Provider value={{openId,close,open,position,setPosition}} >{children}</MenusContext.Provider >
+}
+
+function Menu({children}){
+  return <div>{children}</div>
+}
+
+function Toggle({id}){
+  const{open,openId,close,setPosition} = useContext(MenusContext)
+
+  function handlClick(e){
+    const rect = e.target.closest('button').getBoundingClientRect()
+    setPosition({
+      x:window.innerWidth - rect.width - rect.x,
+      y: rect.y + rect.height + 8
+    })
+    
+   openId ==='' || openId !== id ? open(id) : close()
+   
+  }
+
+  return (
+    <StyledToggle onClick={handlClick}>
+      <HiEllipsisVertical />
+    </StyledToggle>
+  )
+}
+
+function List({id,children}){
+  const{openId,position,close} = useContext(MenusContext)
+
+  const ref = useOutSiteClick(close)
+  if(openId !== id) return
+
+  
+  return (
+  createPortal(
+    <StyledList position = {position} ref = {ref}>
+    {children}
+  </StyledList>,document.body
+  )
+  )
+}
+
+function Button({children,onClick,icon}){
+  const {close} = useContext(MenusContext)
+  function handleClick(){
+    onClick?.()
+     close()
+  }
+  return <li><StyledButton onClick={handleClick}>{icon}<span>{children}</span></StyledButton></li>
+}
+
+Menus.Menu = Menu
+Menus.Button = Button
+Menus.Toggle = Toggle
+Menus.List = List

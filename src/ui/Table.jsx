@@ -1,8 +1,10 @@
+
+import PropTypes from "prop-types";
+import { createContext, useContext } from "react";
 import styled from "styled-components";
 
 const StyledTable = styled.div`
   border: 1px solid var(--color-grey-200);
-
   font-size: 1.4rem;
   background-color: var(--color-grey-0);
   border-radius: 7px;
@@ -19,7 +21,6 @@ const CommonRow = styled.div`
 
 const StyledHeader = styled(CommonRow)`
   padding: 1.6rem 2.4rem;
-
   background-color: var(--color-grey-50);
   border-bottom: 1px solid var(--color-grey-100);
   text-transform: uppercase;
@@ -58,3 +59,51 @@ const Empty = styled.p`
   text-align: center;
   margin: 2.4rem;
 `;
+
+const TableContext = createContext()
+export function Table({columns,children}){
+ return <TableContext.Provider value={{columns}}> <StyledTable role="table" columns = {columns}>{children} </StyledTable> </TableContext.Provider>
+}
+
+export function Header({children}){
+  const {columns} = useContext(TableContext)
+  return <StyledHeader as='header' columns={columns}>{children}</StyledHeader>
+}
+
+export function Row({children}){
+  const {columns} = useContext(TableContext)
+  return <StyledRow columns={columns}>{children}</StyledRow>
+}
+
+ function Body({data,render}){
+
+  if(!data.length) return <Empty>No data to Show!</Empty>
+  
+  return <StyledBody>{data.map(render)}</StyledBody>
+}
+
+Table.Row = Row
+Table.Header = Header
+Table.Row = Row
+Table.Body = Body
+Table.Footer  = Footer
+
+
+Table.propTypes = {
+  columns: PropTypes.string.isRequired,
+  children: PropTypes.node.isRequired,
+};
+
+Header.propTypes = {
+  children: PropTypes.node.isRequired,
+
+};
+
+Row.propTypes = {
+  children: PropTypes.node.isRequired,
+};
+
+Body.propTypes = {
+  data: PropTypes.array.isRequired,
+  render: PropTypes.func.isRequired,
+};
