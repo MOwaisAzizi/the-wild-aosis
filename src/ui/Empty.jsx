@@ -1,5 +1,5 @@
-function Empty({ resource }) {
-  return <p>No {resource} could be found.</p>;
+function Empty({ resoureName }) {
+  return <p>No {resoureName} could be found.</p>;
 }
 
 export default Empty;

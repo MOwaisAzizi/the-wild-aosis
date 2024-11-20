@@ -1,6 +1,7 @@
 import styled from "styled-components"
 import Logo from './Logo'
 import MainNav from './MainNav'
+import Uploader from "../data/Uploader"
 
 export default function Sidebar(){
 
@@ -16,6 +17,7 @@ export default function Sidebar(){
        <StyledSidebar>
         <Logo/>
         <MainNav/>
+        <Uploader/>
        </StyledSidebar>
     )
 }

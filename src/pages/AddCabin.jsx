@@ -6,7 +6,8 @@ import CreateCabinForm from "../features/cabins/CreateCabinForm"
 
 export default function AddCabin(){
 ////compound Component
-return (<Modal>
+return (
+<Modal>
 <Modal.Open opens = 'cabin-form'>
      <Button>Add New Cabin</Button>
 </Modal.Open>
@@ -32,7 +33,7 @@ return (<Modal>
 //     <Button onClick={()=>setshowModal(show=>!show)}>Add New</Button>
 //     {showModal && (
 //              <Modal onCloseModal = {()=>setshowModal(false)}>
-//         <CreateCabinForm onCloseModal = {()=>setshowModal(false)}/>
+     //    <CreateCabinForm onCloseModal = {()=>setshowModal(false)}/>
 //              </Modal>
 //     )
 //     }

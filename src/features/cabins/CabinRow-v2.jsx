@@ -84,7 +84,6 @@ export default function CabinRow({ cabin }) {
               <HiPencil />
             </button>
           </Modal.Open>
-
           <Modal.Window name="edit">
             <CreateCabinForm cabinToEdit={cabin} />
           </Modal.Window>
@@ -95,7 +94,6 @@ export default function CabinRow({ cabin }) {
               <HiTrash />
             </button>
           </Modal.Open>
-
           {/* //confirm window */}
           <Modal.Window name="delete">
             <ConfirmDelete

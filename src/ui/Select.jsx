@@ -13,3 +13,14 @@ const StyledSelect = styled.select`
   font-weight: 500;
   box-shadow: var(--shadow-sm);
 `;
+
+//...props is a nice trick to get all remaining props and directly put it in child
+export default function Select({options,value,onChange,...props}){
+  return <div>
+    <StyledSelect value={value} onChange={onChange} {...props}>
+    {options.map(option=>{
+          return <option key={option.value} value={option.value}>{option.label}</option>
+      })}
+     </StyledSelect>
+  </div>
+}

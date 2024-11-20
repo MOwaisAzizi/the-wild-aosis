@@ -8,7 +8,7 @@ import { HiSquare2Stack } from "react-icons/hi2";
 import { useCreateCabin } from "./useCreateCabin";
 import Modal from "../../ui/Modal";
 import ConfirmDelete from "../../ui/ConfirmDelete";
-import { Table } from "../../ui/Table";
+import Table from "../../ui/Table";
 import Menus from "../../ui/Menus";
 
 const Img = styled.img`
@@ -77,18 +77,14 @@ export default function CabinRow({ cabin }) {
       <div>
         <Modal>
           <Menus.Menu>
-            {/* //like name and opens we use another way like id */}
             <Menus.Toggle id={cabinId} />
-
+            
             <Menus.List id={cabinId}>
               <Modal.Open opens="edit">
                 <Menus.Button icon={<HiPencil />}>Edit</Menus.Button>
               </Modal.Open>
 
-              <Menus.Button onClick={hanldeDuplicate} icon={<HiSquare2Stack />}>
-                {" "}
-                Duplicate
-              </Menus.Button>
+<Menus.Button onClick={hanldeDuplicate} icon={<HiSquare2Stack />}>{" "}Duplicate</Menus.Button>
 
               {/* //opent window */}
               <Modal.Open opens="delete">
@@ -102,12 +98,9 @@ export default function CabinRow({ cabin }) {
 
             {/* //confirm window */}
             <Modal.Window name="delete">
-              <ConfirmDelete
-                disabled={isDeleting}
-                resourceName="cabins"
-                onConfirm={() => deleteCabin(cabinId)}
-              />
+              <ConfirmDelete disabled={isDeleting} resourceName="cabins" onConfirm={() => deleteCabin(cabinId)}/>
             </Modal.Window>
+
           </Menus.Menu>
         </Modal>
       </div>

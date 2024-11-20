@@ -12,6 +12,8 @@ import AppLayout from "./ui/AppLayout";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { Toaster } from "react-hot-toast";
+import Booking from "./pages/Bookins";
+import CheckinBooking from "./features/check-in-out/CheckinBooking";
 
 // these are all in templet leteral but by using extention it seem that is not
 // const StyledApp = styled.div`
@@ -39,11 +41,12 @@ function App() {
    <BrowserRouter> 
     <Routes>  
       <Route element={<AppLayout/>}>
-       
       {/* //this is for default page so whin we do not go to any pages('/') it atomaticall will navigate to pashbord */}
     <Route index element={<Navigate to={'dashboard'}/>}/>
     <Route path="dashboard" element={<Dashboard/>}/>
     <Route path="bookings" element={<Bookings/>}/>
+    <Route path="bookings/:bookingId" element={<Booking/>}/>
+    <Route path="checkin/:bookingId" element={<CheckinBooking/>}/>
     <Route path="cabins" element={<Cabins/>}/>
     <Route path="users" element={<Users/>}/>
     <Route path="settings" element={<Settings/>}/>

@@ -33,8 +33,6 @@ const {mutate,isLoading:isCreating} = useMutation({
 function onSubmit(data){
   //mutate(data)// 👇 name of the input
   mutate({...data,image:data.image[0]});
-  
-  
 }
 
 function onError(){//error

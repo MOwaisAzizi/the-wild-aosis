@@ -61,26 +61,25 @@ const Empty = styled.p`
 `;
 
 const TableContext = createContext()
-export function Table({columns,children}){
+export default function Table({columns,children}){
  return <TableContext.Provider value={{columns}}> <StyledTable role="table" columns = {columns}>{children} </StyledTable> </TableContext.Provider>
 }
 
-export function Header({children}){
+ function Header({children}){
   const {columns} = useContext(TableContext)
   return <StyledHeader as='header' columns={columns}>{children}</StyledHeader>
 }
 
-export function Row({children}){
+ function Row({children}){
   const {columns} = useContext(TableContext)
   return <StyledRow columns={columns}>{children}</StyledRow>
 }
 
  function Body({data,render}){
-
   if(!data.length) return <Empty>No data to Show!</Empty>
-  
   return <StyledBody>{data.map(render)}</StyledBody>
 }
+
 
 Table.Row = Row
 Table.Header = Header
@@ -96,7 +95,6 @@ Table.propTypes = {
 
 Header.propTypes = {
   children: PropTypes.node.isRequired,
-
 };
 
 Row.propTypes = {
