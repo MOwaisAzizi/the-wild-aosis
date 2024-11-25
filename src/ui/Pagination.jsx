@@ -81,7 +81,7 @@ function prevPage(){
 if(pageCount<=1) return null
 
   return <StyledPagination>
-    <P>showing {(currentPage-1)*PAGE_SIZE + 1} to <span>{currentPage===pageCount ? count :
+    <P>showing {(currentPage-1) * PAGE_SIZE + 1} to <span>{currentPage===pageCount ? count :
      currentPage * PAGE_SIZE}</span> of {count} result</P>
  
    <Buttons>
