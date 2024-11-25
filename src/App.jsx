@@ -40,19 +40,19 @@ function App() {
  <GlobalStyles/>
    <BrowserRouter> 
     <Routes>  
-      <Route element={<AppLayout/>}>
-      {/* //this is for default page so whin we do not go to any pages('/') it atomaticall will navigate to pashbord */}
+    <Route element={<AppLayout/>}>
+      {/* //this is for default page so whin we do not go to any pages(by searchbar) it atomaticall will navigate to pashbord */}
     <Route index element={<Navigate to={'dashboard'}/>}/>
     <Route path="dashboard" element={<Dashboard/>}/>
     <Route path="bookings" element={<Bookings/>}/>
     <Route path="bookings/:bookingId" element={<Booking/>}/>
     <Route path="checkin/:bookingId" element={<CheckinBooking/>}/>
     <Route path="cabins" element={<Cabins/>}/>
-    <Route path="users" element={<Users/>}/>
     <Route path="settings" element={<Settings/>}/>
-    <Route path="pageNotFound" element={<PageNotFound/>}/>
+    <Route path="users" element={<Users/>}/>
     <Route path="login" element={<Login/>}/>
     <Route path="account" element={<Account/>}/>
+    <Route path="*" element={<PageNotFound/>}/>
       </Route>
    </Routes>
    </BrowserRouter>

@@ -88,7 +88,6 @@ function hanldeDuplicate(){
 <Modal.Window name="delete">
  <ConfirmDelete disabled={isDeleting} resourceName='cabins' onConfirm = {()=>deleteCabin(cabinId)}/>
 </Modal.Window>
-
  </Modal>
   </div>
 </TableRow>

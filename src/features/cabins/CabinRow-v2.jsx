@@ -107,15 +107,11 @@ export default function CabinRow({ cabin }) {
         <Menus.Menu>
           {/* //like name and opens we use another way like id */}
           <Menus.Toggle id={cabinId} />
-
           <Menus.List id={cabinId}>
             <Menus.Button icon={<HiPencil />}>Edit</Menus.Button>
-            <Menus.Button onClick={hanldeDuplicate} icon={<HiSquare2Stack />}>
-              Duplicate
-            </Menus.Button>
+            <Menus.Button onClick={hanldeDuplicate} icon={<HiSquare2Stack />}>Duplicate</Menus.Button>
             <Menus.Button icon={<HiTrash />}>Delete</Menus.Button>
           </Menus.List>
-          
         </Menus.Menu>
       </div>
     </Table.Row>

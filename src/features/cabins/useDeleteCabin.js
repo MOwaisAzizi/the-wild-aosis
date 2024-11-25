@@ -11,7 +11,7 @@ export function useDeleteCabin(){
         mutationFn : (id)=> deleteCabinApi(id),//or deleteCabin
         onSuccess : () =>{
           toast.success('cabin successfully deleted !')
-          //consume invalid and refresh/we can do not use it but after refresh the table will delete
+          //consume invalid(consume the data is invalid and refreshs the page)/we can, do not use it but after refresh the table will delete
           queryClient.invalidateQueries({
             //refresh this key
             queryKey: ['cabins']

@@ -80,7 +80,7 @@ export default function CabinRow({ cabin }) {
             <Menus.Toggle id={cabinId} />
             
             <Menus.List id={cabinId}>
-              <Modal.Open opens="edit">
+               <Modal.Open opens="edit">
                 <Menus.Button icon={<HiPencil />}>Edit</Menus.Button>
               </Modal.Open>
 
