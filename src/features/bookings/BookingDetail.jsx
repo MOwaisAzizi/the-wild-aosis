@@ -47,8 +47,6 @@ function BookingDetail() {
 
       <BookingDataBox booking={booking} />
 
-
-
       <ButtonGroup>
       {status === 'unconfirmed' && <Button onClick={()=>navigate(`/checkin/${bookingId}`)}>chickin</Button>}
         <Button variation="secondary" onClick={moveBack}>

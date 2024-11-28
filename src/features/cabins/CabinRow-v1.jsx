@@ -69,6 +69,7 @@ function hanldeDuplicate(){
   <Price>{formatCurrency(regularPrice)}</Price>
   {discount ? <Discount>{formatCurrency(discount)}</Discount>: <span>&mdash;</span>}
   <div>
+
  <Modal>
  <button onClick={hanldeDuplicate}><HiSquare2Stack disabled={isCreating}/></button>
   <Modal.Open opens = 'edit'>

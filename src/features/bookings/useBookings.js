@@ -19,8 +19,7 @@ const sortByRaw = searchParams.get("sortBy") || "startDate-desc";
 const [field, direction] = sortByRaw.split("-");
 const sortBy = { field, direction };
 
-const page = !searchParams.get('page') ? 1 :
-Number(searchParams.get('page'))
+const page = !searchParams.get('page') ? 1 : Number(searchParams.get('page'))
 
  const {isLoading,data:{data:bookings,count}={}} =  useQuery({
         ////key to store data for this name to catch , and we put filter to update as the filter changes

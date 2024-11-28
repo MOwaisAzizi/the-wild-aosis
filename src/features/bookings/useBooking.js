@@ -5,7 +5,6 @@ import { useParams } from "react-router-dom"
 //For details of bookins
 export function useBooking() {
   const { bookingId } = useParams();
-  console.log(bookingId + 'in useBooking');
   
   const {
     isLoading,

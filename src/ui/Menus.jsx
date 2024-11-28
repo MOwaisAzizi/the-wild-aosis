@@ -74,7 +74,6 @@ export default function Menus({children}){
   const open = setOpenId
   //(value)setOpenId(value)
 
-
   return <MenusContext.Provider value={{openId,close,open,position,setPosition}} >{children}</MenusContext.Provider >
 }
 

@@ -80,7 +80,6 @@ export default function Table({columns,children}){
   return <StyledBody>{data.map(render)}</StyledBody>
 }
 
-
 Table.Row = Row
 Table.Header = Header
 Table.Row = Row

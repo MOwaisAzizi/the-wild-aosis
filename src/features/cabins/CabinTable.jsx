@@ -27,7 +27,6 @@ const sortedCabin = filterCabins.sort((a,b)=>(a[field] - b[field]) * modifier)
 
 if(!sortedCabin.length) return <Empty resoureName = 'Cabins'/>
 
-
 return (
   <Menus>
   <Table columns = '0.6fr 1.8fr 2.2fr 1fr 1fr 1fr'>
@@ -43,7 +42,7 @@ return (
      render = {(cabin)=><CabinRow cabin={cabin}
      key={cabin.id}/>}/>
   </Table>
-     </Menus>
+</Menus>
 )
 
 }

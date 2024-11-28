@@ -87,7 +87,7 @@ function BookingRow({
         <Menus.Toggle id={bookingId}/>
         <Menus.List id={bookingId}>
         <Menus.Button onClick={()=>navigate(`/bookings/${bookingId}`)}><HiEye/> See Details</Menus.Button>
-        {status === 'unconfirmed' &&<Menus.Button icon={<HiArrowDownOnSquare/>} onClick={()=>navigate(`/checkin/${bookingId}`)}>chickin</Menus.Button>}
+        {status === 'unconfirmed' && <Menus.Button icon={<HiArrowDownOnSquare/>} onClick={()=>navigate(`/checkin/${bookingId}`)}>chickin</Menus.Button>}
         </Menus.List>
       </Menus.Menu>
     </Table.Row>
